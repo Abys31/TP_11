@@ -1,27 +1,27 @@
 package exemple;
 
-import bandeau.Bandeau;
 import java.util.ArrayList;
 
 public class Scenario {
-    public String nomScenario;
-    public ArrayList<Effet> scenario;
+    private String nomScenario; // Nom du scénario
+    private ArrayList<Effet> scenario; // Liste des effets
 
-    public Scenario(String nomScenario, ArrayList<Effet> scenario) {
+    public Scenario(String nomScenario) {
         this.nomScenario = nomScenario;
-        this.scenario = scenario;
+        this.scenario = new ArrayList<>();
     }
 
-    public void AjouteAuScenario(Effet EffetAjouter, int Repetition) {
-        for (int i = 1; i <= Repetition; i++) {
-            scenario.add(EffetAjouter);
+    // Ajoute un effet au scénario avec répétition
+    public void ajouterEffet(Effet effet, int repetitions) {
+        for (int i = 0; i < repetitions; i++) {
+            scenario.add(effet);
         }
     }
-    public void executerScenario(Bandeau Bd){
-        for(Effet ef : scenario) {
-            ef.executer(Bd);
+
+    // Exécute tous les effets du scénario
+    public void executerScenario() {
+        for (Effet effet : scenario) {
+            effet.jouer();
         }
-
-
     }
 }

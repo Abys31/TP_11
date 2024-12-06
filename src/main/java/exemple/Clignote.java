@@ -1,28 +1,29 @@
 package exemple;
 
-import bandeau.Bandeau;
-
-import java.awt.*;
+import java.awt.Color;
 
 public class Clignote extends Effet {
+    private int repetitions;
+    private int duree;
 
-    public Clignote() {
+    public Clignote(Bandeau bandeau, int repetitions, int duree) {
+        super(bandeau); // Appel au constructeur parent
+        this.repetitions = repetitions;
+        this.duree = duree;
     }
-    public void executer(Bandeau Bd){
-        Bd.setMessage("Ca clignote!!");
-        Color B= Bd.getBackground();
-        Bd.setForeground(Color.BLACK);
-        Color C=Bd.getForeground();
-        Bd.setForeground(B);
-        Bd.sleep(200);
-        Bd.setForeground(C);
-        Bd.sleep(200);
-        Bd.setForeground(B);
-        Bd.sleep(200);
-        Bd.setForeground(C);
-        Bd.sleep(200);
-        Bd.setForeground(B);
-        Bd.sleep(200);
-        Bd.setForeground(C);
+
+    @Override
+    public void jouer() {
+        bandeau.setMessage("Ça clignote !!");
+        Color couleurInitiale = bandeau.getForeground();
+
+        for (int i = 0; i < repetitions; i++) {
+            bandeau.setForeground(Color.BLACK);
+            bandeau.sleep(duree);
+            bandeau.setForeground(couleurInitiale);
+            bandeau.sleep(duree);
+        }
+
+        bandeau.setForeground(couleurInitiale);
     }
 }

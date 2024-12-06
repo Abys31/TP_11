@@ -1,19 +1,22 @@
 package exemple;
 
-import bandeau.Bandeau;
-
 public class Rotation extends Effet {
-    public int Rotation;
+    private int repetitions;
+    private double angle; // Angle de rotation en radians
 
-    public Rotation(int Rotation) {
-        this.Rotation = Rotation;
+    public Rotation(Bandeau bandeau, int repetitions, double angle) {
+        super(bandeau);
+        this.repetitions = repetitions;
+        this.angle = angle;
     }
 
-
-    public void executer (Bandeau Bd){
-        Bd.setMessage("On tourne");
-        double Anglerotation = Bd.getRotation();
-        Bd.setRotation(Rotation+Anglerotation);
-        Bd.sleep(35);
+    @Override
+    public void jouer() {
+        bandeau.setMessage("On tourne...");
+        for (int i = 0; i < repetitions; i++) {
+            bandeau.setRotation(bandeau.getRotation() + angle);
+            bandeau.sleep(200); // Temps pour observer chaque étape
+        }
+        bandeau.setRotation(0); // Réinitialisation après l'effet
     }
 }
